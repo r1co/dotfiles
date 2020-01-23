@@ -21,5 +21,4 @@ tmux setw -g window-status-current-style "$STYLE_TAB_ACTIVE"
 tmux setw -g window-status-style "$STYLE_TAB"
 
 tmux 	set -qg prefix C-b
-tmux display-message "enabled"
 rm -f /tmp/tmux-inactive

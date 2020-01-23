@@ -17,10 +17,6 @@ tmux set -g status-left-style "$STYLE_LEFT_INACTIVE"
 tmux setw -g window-status-current-style "$STYLE_TAB_ACTIVE_INACTIVE"
 tmux setw -g window-status-style "$STYLE_TAB_INACTIVE"
 
-#tmux unbind -n -
-#tmux unbind -n _
 
 tmux set -qg prefix C-a
-tmux display-message "disabled"
-
 touch /tmp/tmux-inactive
