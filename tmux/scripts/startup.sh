@@ -5,8 +5,6 @@ source "$HOME/.dotfiles/tmux/config/common.sh"
 # set panes clickable
 tmux set -g mouse on
 
-
-
 # bind reload
 tmux bind-key r source-file $HOME/.tmux.conf \; display-message "~/.tmux.conf reloaded"
 
@@ -54,15 +52,11 @@ tmux set -g pane-active-border-style "fg=$COLOR_BORDER_FG bg=$COLOR_BORDER_BG"
 tmux set -g pane-border-style "fg=$COLOR_BORDER_FG_INACTIVE bg=$COLOR_BORDER_BG_INACTIVE"
 
 # switch to nested tmux session (shift + up/down)
-tmux bind -n M-F11 set -qg status-bg $COLOR_STATUS_BAR_BG_INACTIVE
-tmux bind -n M-F12 set -qg status-bg $COLOR_STATUS_BAR_BG
+#tmux bind -n M-F11 set -qg status-bg $COLOR_STATUS_BAR_BG_INACTIVE
+#tmux bind -n M-F12 set -qg status-bg $COLOR_STATUS_BAR_BG
+tmux bind -n M-F11 setw -g window-status-current-style "$STYLE_TAB_ACTIVE_INACTIVE"
+tmux bind -n M-F12 setw -g window-status-current-style "$STYLE_TAB_ACTIVE"
 
-tmux bind -n S-up \
-  run -b '$TMUX_SCRIPT_PATH/disable.sh'
-
-
-tmux bind -n S-down \
-  run -b '$TMUX_SCRIPT_PATH/enable.sh'
 
 # set vars
 tmux set -g @cpu_low_fg_color "$COLOR_CPU_LOAD_LOW" # foreground color when cpu is low
