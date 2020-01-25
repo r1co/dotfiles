@@ -6,3 +6,5 @@ lib/*
 !lib/.placeholder
 
 zsh/ohmyzsh-custom/plugins/zsh-256color
+
+.tmp-git/
