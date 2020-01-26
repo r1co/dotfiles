@@ -8,7 +8,7 @@ uptimeInfoLinux(){
   if [ $UPTIME_MIN -lt 10 ]; then
     UPTIME_MIN="0$UPTIME_MIN"
   fi
-  echo $UPTIME_HOURS:$UPTIME_MIN
+  echo "($UPTIME_HOURS:$UPTIME_MIN)"
 }
 
 uptimeInfoOSX() {
