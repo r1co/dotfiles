@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Colors ----------------
+COLOR_FULLSCREEN_INDICATOR="colour202"
 COLOR_STATUS_BAR_BG="colour235"
 COLOR_STATUS_BAR_BG_INACTIVE="colour235"
 COLOR_STATUS_BAR_FG="colour15"
