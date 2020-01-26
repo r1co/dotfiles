@@ -20,7 +20,11 @@ cpuInfoLinux() {
 
 
 cpuInfoOSX() {
-  echo "not supported yet"
+  if [ "$PERCENTAGE" = 0 ]; then
+    echo "not supported yet"
+  else
+    uptime  | grep -o 'load.*' | cut -d":" -f2  | xargs -L1
+  fi
 }
 
 if [ "$(uname)" == "Darwin" ]; then

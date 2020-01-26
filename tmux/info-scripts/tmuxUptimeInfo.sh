@@ -12,7 +12,7 @@ uptimeInfoLinux(){
 }
 
 uptimeInfoOSX() {
-  echo "XX:XX"
+  echo ""
 }
 
 if [ "$(uname)" == "Darwin" ]; then
