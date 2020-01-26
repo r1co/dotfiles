@@ -61,6 +61,7 @@ alias d.psa="docker ps -a --format \"{{.ID}}: {{.Names}} '{{.Status}}' '{{.Ports
 alias d.run='docker run -it'  # run docker container in fg
 alias d.runBg='docker run -d' # run docker container in bg
 alias d.rmStopped='docker ps -a | grep Exited | cut -d" " -f1 | xargs -L1 docker rm'
+alias d.rmCreated='docker ps -a | grep Created | cut -d" " -f1 | xargs -L1 docker rm'
 # docker-compose
 alias dc.up='docker-compose up'
 alias dc.ps='docker-compose ps'

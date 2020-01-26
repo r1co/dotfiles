@@ -3,7 +3,7 @@
 function zsh.flag.handler.autostartTMux () {
     # return (disable) if flag is set to true
     if [ ! -z "$DOTFILES_DISABLE_TMUX" ]; then
-      if [ "$DOTFILES_DISABLE_TMUX" = "true" ]; then
+      if [ "$DOTFILES_DISABLE_TMUX" -eq 0 ]; then
         echo "tmux disabled by environment flag"
         return
       fi
