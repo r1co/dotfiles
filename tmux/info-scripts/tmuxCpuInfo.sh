@@ -14,7 +14,7 @@ cpuInfoLinux() {
   if [ "$PERCENTAGE" = 0 ]; then
     echo "$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf("%.0f", usage)}')%"
   else
-    cat /proc/loadavg | cut -d' ' -f1,2,3 | sed 's/ /:/g'
+    cat /proc/loadavg | cut -d' ' -f1,2,3 | sed 's/ /⊙/g'
   fi
 }
 

@@ -5,7 +5,7 @@ source $ZSH_CUSTOM/themes/dot.vars.zsh-theme
 
 PROMPT='
 $(_user_host)$(_current_dir)$(git_prompt_short_sha)$(git_prompt_info)
-$USER_COLOR▶%f '
+$USER_COLOR❱%f '
 
 PROMPT2='%{$fg[$CARETCOLOR]%}◀%{$reset_color%} '
 

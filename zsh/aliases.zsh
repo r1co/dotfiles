@@ -71,6 +71,7 @@ alias dc.re='docker-compose restart'
 # system
 alias sys.ports='sudo netstat -tulanp'
 alias sys.pid='getPidAndCommand'
+alias sys.upud='sudo apt update && sudo apt upgrade'
 
 # flags
 alias zsh.flags='echo $ALL_FLAGS[*]' # list all availaible flags
