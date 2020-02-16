@@ -23,7 +23,7 @@ fi
 # select plugins
 plugins=(zsh-256color git docker)
 
-# load bd plugin 
+# load bd plugin
 . $ZSH_CUSTOM/plugins/bd/bd.zsh
 
 # load host config
