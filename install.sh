@@ -53,6 +53,12 @@ else
   cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color
 fi
 
+# install zsh-bd
+rm -rf $ZSH_CUSTOM/plugins/bd
+mkdir -p $ZSH_CUSTOM/plugins/bd
+curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > $ZSH_CUSTOM/plugins/bd/bd.zsh
+chmod +x $ZSH_CUSTOM/plugins/bd/bd.zsh
+
 echo "creating symlinks"
 if test -f "$ZSH_CONFIG_FILE"; then
 	echo "$ZSH_CONFIG_FILE exists"

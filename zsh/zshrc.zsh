@@ -23,6 +23,9 @@ fi
 # select plugins
 plugins=(zsh-256color git docker)
 
+# load bd plugin 
+. $ZSH_CUSTOM/plugins/bd/bd.zsh
+
 # load host config
 HOST_CONFIG="$HOST_CONFIG_ROOT/$(hostname).zsh"
 if test -f "$HOST_CONFIG"; then
