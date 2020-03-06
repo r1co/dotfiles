@@ -66,7 +66,6 @@ function dig.rootNS() {
       echo ">>> $ns_server"
     fi
   done
-#  echo $ROOT_SERVER | xargs -i bash -c "dig NS +noadditional +noquestion +nocomments +nocmd +nostats @{} $1 | head -1 | xargs -L1 | cut -d' ' -f5 " | xargs -i bash -c "dig  +noquestion +nocomments +nocmd +nostats @{} $1"
 }
 
 # password generation
