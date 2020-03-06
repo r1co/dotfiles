@@ -50,6 +50,25 @@ alias net.status='nmcli device status'
 alias net.connections='nmcli connection show'
 alias net.routes='ip route | column -t'
 
+# dns
+function dig.rootNS() {
+  ROOT_SERVER=$(dig NS +noadditional +noquestion +nocomments +nocmd +nostats | head -1 | xargs -L1 | cut -d' ' -f5)
+  echo "> $ROOT_SERVER"
+  FIRST_LEVEL_DNS=$(dig NS +noadditional +noquestion +nocomments +nocmd +nostats @$ROOT_SERVER $1 | head -1 | xargs -L1 | cut -d' ' -f5)
+  echo ">> $FIRST_LEVEL_DNS"
+  NS_SERVER=$(dig  +noquestion +nocomments +nocmd +nostats @$FIRST_LEVEL_DNS $1 | grep NS | xargs -L1 | cut -d' ' -f5);
+  echo $NS_SERVER | while read ns_server ; do
+    GLUE_RECORD=$(dig  +noquestion +nocomments +nocmd +nostats @$FIRST_LEVEL_DNS $1 | grep A | grep $ns_server |  xargs -L1 | cut -d' ' -f5)
+    if [ ! -z "$GLUE_RECORD" ]
+    then
+      echo ">>> $ns_server ($(echo $GLUE_RECORD |  tr '\n' ' '))"
+    else
+      echo ">>> $ns_server"
+    fi
+  done
+#  echo $ROOT_SERVER | xargs -i bash -c "dig NS +noadditional +noquestion +nocomments +nocmd +nostats @{} $1 | head -1 | xargs -L1 | cut -d' ' -f5 " | xargs -i bash -c "dig  +noquestion +nocomments +nocmd +nostats @{} $1"
+}
+
 # password generation
 alias pw8='openssl rand -base64 8'
 alias pw16='openssl rand -base64 16'
@@ -82,7 +101,7 @@ alias dot.update='cd ~/.dotfiles && git pull'
 
 # tmux commands
 alias tmux.kill-server="tmux kill-server"
-alias tmux.kill="alias.tmux.kill" # kill session
+alias tmux.kill="alias.tmux.kill"              # kill session
 alias tmux.kill-others="alias.tmux.killOthers" # kill session
 alias tmux.n="tmux new-session -d -s"
 alias tmux.ns="alias.tmux.newIfNotExistAndSwitch"
