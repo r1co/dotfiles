@@ -61,7 +61,7 @@ function dig.rootNS() {
     GLUE_RECORD=$(dig  +noquestion +nocomments +nocmd +nostats @$FIRST_LEVEL_DNS $1 | grep A | grep $ns_server |  xargs -L1 | cut -d' ' -f5)
     if [ ! -z "$GLUE_RECORD" ]
     then
-      echo ">>> $ns_server ($(echo $GLUE_RECORD |  tr '\n' ' '))"
+      echo ">>> $ns_server ($(echo $GLUE_RECORD |  tr '\n' ' ' | xargs -L1))"
     else
       echo ">>> $ns_server"
     fi
