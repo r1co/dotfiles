@@ -95,10 +95,7 @@ alias dot.update='cd ~/.dotfiles && git pull'
 
 # tmux commands
 alias tmux.kill-server="tmux kill-server"
-alias tmux.kill="alias.tmux.kill"              # kill session
-alias tmux.kill-others="alias.tmux.killOthers" # kill session
 alias tmux.n="tmux new-session -d -s"
-alias tmux.ns="alias.tmux.newIfNotExistAndSwitch"
 alias tmux.s="tmux switch-client -t "
 alias tmux.switch="tmux switch-client -t "
 alias tmux.res="tmux rename-session"
