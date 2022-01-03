@@ -14,9 +14,3 @@ ZSH_FLAG_EXT=".zsh.flag"
 
 TMUX_FLAG_ALIAS_PREFIX="tmux.flag"
 TMUX_FLAG_EXT=".tmux.flag"
-
-# prompt asccii art
-export IMG="¯\_(ツ)_/¯"
-
-# Workspace
-export ZSH_WORKSPACE_PATH_FILE="$HOME/.zsh_workspace"

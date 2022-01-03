@@ -8,12 +8,6 @@ alias .....='cd ../../../..'
 
 # Folder Shortcuts
 alias d='cd ~/Downloads'
-alias w='cd $(cat $ZSH_WORKSPACE_PATH_FILE)'
-
-# Workspace Shortcuts
-alias ws.print='echo Workspace: $(cat $ZSH_WORKSPACE_PATH_FILE)'
-alias ws.set='pwd > $ZSH_WORKSPACE_PATH_FILE'
-alias ws.setpath='echo $1 > $ZSH_WORKSPACE_PATH_FILE'
 
 # untar
 alias untar='tar -zxvf '
@@ -74,6 +68,7 @@ alias pw16='openssl rand -base64 16'
 alias pw32='openssl rand -base64 32'
 
 # docker
+#alias docker="podman"
 alias d.ps="docker ps --format \"{{.ID}}: {{.Names}} '{{.Status}}' '{{.Ports}}'\" | column -t -s \"'\" "
 alias d.psa="docker ps -a --format \"{{.ID}}: {{.Names}} '{{.Status}}' '{{.Ports}}'\" | column -t -s \"'\""
 alias d.run='docker run -it'  # run docker container in fg
@@ -109,3 +104,6 @@ alias tmux.switch="tmux switch-client -t "
 alias tmux.res="tmux rename-session"
 alias tmux.rew="tmux rename-window"
 alias tmux.reload="tmux source-file ~/.tmux.conf \;" # tmux display-message "~/.tmux.conf reloaded""
+
+# linux
+alias open="flatpak run re.sonny.Junction"
