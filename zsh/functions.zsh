@@ -26,8 +26,8 @@ function defineFlag () {
   alias $FLAG_ALIAS_PREFIX.enable.$1="touch $FLAG_ROOT/$1$FLAG_EXT && echo '$1 enabled'"
   alias $FLAG_ALIAS_PREFIX.disable.$1="rm -f $FLAG_ROOT/$1$FLAG_EXT && echo '$1 disabled'"
 
-  DEBUG "alias $FLAG_ALIAS_PREFIX.enable.$1 created"
-  DEBUG "alias $FLAG_ALIAS_PREFIX.disable.$1 created"
+  # DEBUG "alias $FLAG_ALIAS_PREFIX.enable.$1 created"
+  # DEBUG "alias $FLAG_ALIAS_PREFIX.disable.$1 created"
 
   if checkFlag $1 $FLAG_EXT; then
     $2

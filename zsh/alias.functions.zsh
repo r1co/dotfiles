@@ -19,3 +19,6 @@ function tmux.kill-others() {
     current_id=$(tmux display-message -p '#S')
     tmux list-sessions | grep -v "$current_id: " | cut -d: -f1 | xargs -i tmux kill-session -t {}
 }
+
+
+

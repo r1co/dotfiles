@@ -1,7 +1,6 @@
 .idea/*
 themes/*.zsh
 flags/*.flag
-zsh/host-config/*.zsh
 lib/*
 !lib/.placeholder
 
