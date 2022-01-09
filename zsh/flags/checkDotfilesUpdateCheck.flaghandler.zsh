@@ -24,7 +24,7 @@ function $HANDLER_NAME(){
 		UPSTREAMHASH=$(cd ~/.dotfiles/ && git rev-parse master@{upstream})
 		if [ "$HEADHASH" != "$UPSTREAMHASH" ]
 		then
-			printYellow '!!! Please push/pull dotfile changes !!!'
+			printYellow '!!! Please pull dotfile updates !!!'
 		else
 			printBlue "No updates available"
 		fi
