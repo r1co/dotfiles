@@ -7,13 +7,12 @@ function $HANDLER_NAME(){
     	echo "0" > $COUNTER_FILE
 	fi
 
-	CHECK_EVERT_N_STARTUPS=10
 	COUNTER_VALUE=$(cat $COUNTER_FILE)
 
 	DEBUG "Startups since last update: $COUNTER_VALUE"
 
-	if [ "$COUNTER_VALUE" -le "$CHECK_EVERT_N_STARTUPS" ]; then
-		DEBUG "Check update every $CHECK_EVERT_N_STARTUPS startups, skip"
+	if [ "$COUNTER_VALUE" -le "$CHECK_EVERY_N_STARTUPS" ]; then
+		DEBUG "Check update every $CHECK_EVERY_N_STARTUPS startups, skip"
 		COUNTER_VALUE=$((COUNTER_VALUE + 1))
 		echo $COUNTER_VALUE > $COUNTER_FILE
 	else
