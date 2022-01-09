@@ -135,6 +135,11 @@ function printBlue(){
 	NC='\033[0m' # No Color
 	echo "${COLOR}$@${NC}"
 }
+function printYellow(){
+  COLOR='\033[0;33m'
+	NC='\033[0m' # No Color
+	echo "${COLOR}$@${NC}"
+}
 
 
 
