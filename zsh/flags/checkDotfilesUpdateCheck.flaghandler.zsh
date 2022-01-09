@@ -18,7 +18,7 @@ function $HANDLER_NAME(){
 		echo $COUNTER_VALUE > $COUNTER_FILE
 	else
 		# check if there are dotfile updates available (slows down zsh startup)
-		printBlue "Check if dotfile update available"
+		printBlue "Check if dotfiles update available"
 		FETCH=$(cd ~/.dotfiles/ && git fetch --quiet)
 		HEADHASH=$(cd ~/.dotfiles/ && git rev-parse HEAD)
 		UPSTREAMHASH=$(cd ~/.dotfiles/ && git rev-parse master@{upstream})
