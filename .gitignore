@@ -9,3 +9,5 @@ zsh/ohmyzsh-custom/plugins/zsh-256color
 .tmp-git/
 
 zsh/ohmyzsh-custom/plugins/bd/
+
+zsh/.storage/

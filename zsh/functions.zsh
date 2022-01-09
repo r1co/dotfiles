@@ -10,6 +10,13 @@ function DEBUG () {
     echo "DEBUG: $1"
   fi
 }
+function DEBUG_ALIASES () {
+  # do not use checkFlag here!!!
+  FLAG="$FLAG_ROOT/debug-aliases$ZSH_FLAG_EXT"
+  if test -f "$FLAG"; then
+    echo "DEBUG: $1"
+  fi
+}
 
 function noop() {
 
@@ -54,6 +61,80 @@ function defineTmuxFlag () {
   defineFlag $1 noop $TMUX_FLAG_EXT $TMUX_FLAG_ALIAS_PREFIX
 }
 
+function getPlatform() {
+  if [[ "$(uname)" == "Darwin" ]]; then
+      echo "Darwin"
+      return "Darwin"
+  elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+      echo "Linux"
+      return "Linux"
+  fi
+  echo "Unkown" 
+  return "Unkown" 
+}
+
+function isDarwin() {
+  platform=$(getPlatform)
+  if [[ "$platform" == "Darwin" ]]; then
+    echo true
+    return true
+  fi
+  echo false 
+  return false
+}
+
+function isLinux() {
+  platform=$(getPlatform)
+  if [[ "$platform" == "Linux" ]]; then
+    echo true
+    return true
+  fi
+  echo false 
+  return false
+}
+
+function defineCommonAlias() {
+  name=$1
+  command=$2
+
+  DEBUG_ALIASES "Add common alias $name"
+  alias $name=$command
+}
+
+function defineLinuxAlias() {
+  name=$1
+  command=$2
+
+  if [[ "$(isLinux)" == true ]]; then
+    DEBUG_ALIASES "Add linux alias $name"
+    alias $name=$command
+  else
+    DEBUG_ALIASES "Ignore alias $name for platform $(getPlatform)"
+  fi
+}
+
+function defineOSXAlias() {
+  name=$1
+  command=$2
+
+  if [[ "$(isDarwin)" == true ]]; then
+    DEBUG_ALIASES "Add osx alias $name"
+    alias $name=$command
+  else
+    DEBUG_ALIASES "Ignore alias $name for platform $(getPlatform)"
+  fi
+}
+
+function printRed(){
+  COLOR='\033[0;31m'
+	NC='\033[0m' # No Color
+	echo "${COLOR}$@${NC}"
+}
+function printBlue(){
+  COLOR='\033[0;34m'
+	NC='\033[0m' # No Color
+	echo "${COLOR}$@${NC}"
+}
 
 
 
@@ -67,82 +148,4 @@ getPidAndCommand() {
 	ps aux | grep $1 | xargs -L1 | cut -d' ' -f 2,11
 }
 
-findFile() {
-	FILENAME=$1
-	SEARCH_PATH=$2
 
-	if [ -z "$FILENAME" ]
-  	then
-        echo "usage find.file <filename> (<searchpath>)"
-        exit 1
-    fi
-
-    if [ -z "$SEARCH_PATH" ]
-  	then
-        SEARCH_PATH=$(pwd)
-    fi
-
-	echo "search for ${FILENAME} in $SEARCH_PATH"
-	find $SEARCH_PATH -iname $FILENAME -type f -print
-
-}
-
-findInFile() {
-	SEARCHTEXT=$1
-	SEARCH_PATH=$2
-
-	if [ -z "$SEARCHTEXT" ]
-  	then
-        echo "usage find.inFile <SEARCHTEXT> (<searchpath>)"
-        exit 1
-    fi
-
-    if [ -z "$SEARCH_PATH" ]
-  	then
-        SEARCH_PATH=$(pwd)
-    fi
-
-	echo "search for text ${FILENAME} in $SEARCH_PATH"
-	find $SEARCH_PATH -type f -exec grep -il $SEARCHTEXT {} \;
-
-}
-
-findBigFiles() {
-	SIZE=$1
-	SEARCH_PATH=$2
-
-	if [ -z "$SIZE" ]
-  	then
-        echo "usage find.inFile <SIZE> (<searchpath>)"
-        exit 1
-    fi
-
-    if [ -z "$SEARCH_PATH" ]
-  	then
-        SEARCH_PATH=$(pwd)
-    fi
-
-	echo "search for filesize $SIZE in $SEARCH_PATH"
-	find $SEARCH_PATH -type f -size $SIZE -exec ls -lh {} \; | xargs -L1 | cut -d " " -f5,9-
-
-}
-
-findDir () {
-	FILENAME=$1
-	SEARCH_PATH=$2
-
-	if [ -z "$FILENAME" ]
-  	then
-        echo "usage find.dir <name> (<searchpath>)"
-        exit 1
-    fi
-
-    if [ -z "$SEARCH_PATH" ]
-  	then
-        SEARCH_PATH=$(pwd)
-    fi
-
-	echo "search for ${FILENAME} in $SEARCH_PATH"
-	find $SEARCH_PATH -iname $FILENAME -type d -print
-
-}

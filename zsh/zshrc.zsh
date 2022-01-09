@@ -4,6 +4,9 @@ source $ZSH_ROOT/functions.zsh
 
 DEBUG "Debugging enabled"
 
+# create scripts storage root 
+mkdir -p $ZSH_SCRIPTS_STORAGE_ROOT
+
 # set zsh root
 export ZSH="$OHMYZSH_ROOT"
 
@@ -27,10 +30,10 @@ source $ZSH/oh-my-zsh.sh
 . $ZSH_ROOT/plugins/bd/bd.zsh
 
 # source flags
-source $FLAGS_FILE
+source $ZSH_ROOT/flags.zsh
 
 # source config
-source $ALIASES_FILE
+source $ZSH_ROOT/aliases.zsh
 
 
 [[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor

@@ -1,4 +1,16 @@
 
+# tmux commands
+
+
+defineLinuxAlias tmux.kill-server "tmux kill-server"
+defineLinuxAlias tmux.n "tmux new-session -d -s"
+defineLinuxAlias tmux.s "tmux switch-client -t "
+defineLinuxAlias tmux.switch="tmux switch-client -t "
+defineLinuxAlias tmux.res "tmux rename-session"
+defineLinuxAlias tmux.rew "tmux rename-window"
+defineLinuxAlias tmux.reload "tmux source-file ~/.tmux.conf \;" # tmux display-message "~/.tmux.conf reloaded""
+
+
 function tmux.ns() {
     tmux has-session -t $session 2>/dev/null
     if [ $? != 0 ]; then
@@ -19,6 +31,7 @@ function tmux.kill-others() {
     current_id=$(tmux display-message -p '#S')
     tmux list-sessions | grep -v "$current_id: " | cut -d: -f1 | xargs -i tmux kill-session -t {}
 }
+
 
 
 

@@ -15,3 +15,7 @@ export PATH="$PATH:/home/r1co/.local/bin"
 
 # go 
 export PATH="$PATH:/home/r1co/go/bin"
+
+
+# linux
+alias open="flatpak run re.sonny.Junction"

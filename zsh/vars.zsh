@@ -5,11 +5,12 @@ ZSH_ROOT="$DOTFILES_ROOT/zsh"
 OHMYZSH_ROOT="$DOTFILES_ROOT/lib/ohmyzsh"
 
 ZSH_FLAG_CONFIG_ROOT="$ZSH_ROOT/flags"
+ZSH_ALIASES_CONFIG_ROOT="$ZSH_ROOT/aliases"
 
 HOST_CONFIG_ROOT="$ZSH_ROOT/host-config"
 
-ALIASES_FILE="$ZSH_ROOT/aliases.zsh"
-FLAGS_FILE="$ZSH_ROOT/flags.zsh"
+# ALIASES_FILE="$ZSH_ROOT/aliases.zsh"
+# FLAGS_FILE="$ZSH_ROOT/flags.zsh"
 
 ZSH_FLAG_ALIAS_PREFIX="zsh.flag"
 ZSH_FLAG_EXT=".zsh.flag"
@@ -18,3 +19,4 @@ ZSH_FLAG_HANDLER_EXT=".flaghandler.zsh"
 TMUX_FLAG_ALIAS_PREFIX="tmux.flag"
 TMUX_FLAG_EXT=".tmux.flag"
 
+ZSH_SCRIPTS_STORAGE_ROOT="$ZSH_ROOT/.storage"
