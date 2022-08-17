@@ -15,7 +15,16 @@ export PATH="$PATH:/home/r1co/.local/bin"
 
 # go 
 export PATH="$PATH:/home/r1co/go/bin"
+export GO111MODULE=on
 
+# android
+export PATH="$PATH:/home/r1co/Projects/Android/SDK/cmdline-tools/bin"
+export PATH="$PATH:/home/r1co/Projects/Android/SDK/sdk/tools"
+export PATH="$PATH:/home/r1co/Projects/Android/SDK/sdk/platform-tools"
+
+export ANDROID_SDK_ROOT="/home/r1co/Projects/Android/SDK/sdk"
 
 # linux
 alias open="flatpak run re.sonny.Junction"
+
+

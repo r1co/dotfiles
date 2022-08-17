@@ -14,14 +14,16 @@ export ZSH="$OHMYZSH_ROOT"
 ZSH_CUSTOM=$ZSH_ROOT/ohmyzsh-custom
 
 # See custom/theme/my-theme.zsh-theme
-if [[ $EUID -ne 0 ]]; then
-   ZSH_THEME="dot"
-else
-  ZSH_THEME="dot-root"
+if [[ -z "$ZSH_THEME" ]]; then
+  if [[ $EUID -ne 0 ]]; then
+    ZSH_THEME="dot"
+  else
+    ZSH_THEME="dot-root"
+  fi
 fi
 
 # select plugins
-plugins=(zsh-256color git docker)
+plugins=(zsh-256color git docker aliases history gitignore)
 
 # source ohmyzsh
 source $ZSH/oh-my-zsh.sh
@@ -56,3 +58,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 PATH=/Users/enrico.weigelt/JOBS/NPM/lzdev/bin:$PATH
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
