@@ -25,6 +25,17 @@ export PATH="$PATH:/home/r1co/Projects/Android/SDK/sdk/platform-tools"
 export ANDROID_SDK_ROOT="/home/r1co/Projects/Android/SDK/sdk"
 
 # linux
+alias gitkraken="flatpak run com.axosoft.GitKraken"
 alias open="flatpak run re.sonny.Junction"
+alias wezterm='flatpak run org.wezfurlong.wezterm'
+
+
+# jenv 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
 
 

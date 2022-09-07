@@ -1,22 +1,14 @@
 local wezterm = require 'wezterm';
 
-function scheme_for_appearance(appearance)
-    if appearance:find "Dark" then
-        return "Catppuccin Mocha"
-    else
-        return "Catppuccin Latte"
-    end
-end
 
 return {
     font_size = 10,
     font = wezterm.font('JetBrains Mono', {italic = false, harfbuzz_features = {'calt=0', 'clig=0', 'liga=0'}}),
-
     default_cursor_style = "BlinkingUnderline",
     cursor_blink_rate = 800,
 
     warn_about_missing_glyphs = false,
-    color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+    color_scheme =  "Catppuccin Mocha",
     window_background_opacity = 1.0,
     inactive_pane_hsb = {
         saturation = 0.9,
@@ -34,8 +26,8 @@ return {
 
     launch_menu = {
         {
-            label = "Top",
-            args = {"top"},
+            label = "htop",
+            args = {"htop"},
         },
 
     },
