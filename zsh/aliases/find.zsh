@@ -12,7 +12,7 @@ findFile() {
 	if [ -z "$FILENAME" ]
   	then
         echo "usage find.file <filename> (<searchpath>)"
-        exit 1
+        return 1
     fi
 
     if [ -z "$SEARCH_PATH" ]
@@ -32,7 +32,7 @@ findInFile() {
 	if [ -z "$SEARCHTEXT" ]
   	then
         echo "usage find.inFile <SEARCHTEXT> (<searchpath>)"
-        exit 1
+        return 1
     fi
 
     if [ -z "$SEARCH_PATH" ]
@@ -72,7 +72,7 @@ findDir () {
 	if [ -z "$FILENAME" ]
   	then
         echo "usage find.dir <name> (<searchpath>)"
-        exit 1
+        return 1
     fi
 
     if [ -z "$SEARCH_PATH" ]
