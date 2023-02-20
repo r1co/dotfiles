@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+CONTEXT=$(find-docker-context)
+echo "Running in context $CONTEXT"
+/usr/bin/docker --context $CONTEXT $@

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DIR=$(pwd)
+CONTEXT_FILE=".docker-context"
+
+while [[ "$DIR" != "" && ! -e "$DIR/$CONTEXT_FILE" ]]; do
+    DIR=${DIR%/*}
+done
+
+CONTEXT_NAME="default"
+if [[ "$DIR" != ""  ]]; then
+    CONTEXT_FILE_PATH="$DIR/$CONTEXT_FILE"
+    CONTEXT_NAME=$(cat $CONTEXT_FILE_PATH)
+fi
+
+echo $CONTEXT_NAME
