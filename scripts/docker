@@ -1,6 +1,20 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+NC='\033[0m'
 
-CONTEXT=$(find-docker-context)
-echo "Running in context $CONTEXT"
-/usr/bin/docker --context $CONTEXT $@
+CONTEXT="$(find-docker-context)"
+
+# use --context parameter is set
+if [[ "$*" == *"--context"* ]]
+then
+    printf "${RED}Overwrite context from parameter.${NC}\n"
+    CONTEXT=""
+else
+    printf "Running in context ${RED}$CONTEXT${NC}\n"
+    CONTEXT="--context $CONTEXT"
+fi
+
+# set -x
+/usr/bin/docker $CONTEXT "$@"
+# set +x
