@@ -1,19 +1,19 @@
 source $HOME/.dotfiles/zsh/zshrc.zsh
 
-# nvm 
+# nvm compinit
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# global yarn 
+# global yarn
 export PATH="$PATH:`yarn global bin`"
 
 # platformio
 export PATH="$PATH:/home/r1co/.platformio/penv/bin"
 
-# pip 
+# pip
 export PATH="$PATH:/home/r1co/.local/bin"
 
-# go 
+# go
 export PATH="$PATH:/home/r1co/go/bin"
 export GO111MODULE=on
 
@@ -30,7 +30,7 @@ alias open="flatpak run re.sonny.Junction"
 alias wezterm='flatpak run org.wezfurlong.wezterm'
 
 
-# jenv 
+# jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
