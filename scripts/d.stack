@@ -1,0 +1,41 @@
+#!/bin/bash
+
+STACK_NAME=$(basename $(pwd))
+COMPOSE_FILE="docker-compose.yaml"
+
+SERVICE_CONFIG_FILE="service.yaml"
+
+CMD=$1
+ARG_OFFSET=2
+
+CMD_EXTRA=""
+
+if test -f "$SERVICE_CONFIG_FILE"; then
+    source $SERVICE_CONFIG_FILE
+fi
+
+if [ -n "$CMD" ]
+then
+    if [ $CMD = "deploy" ];
+    then
+        CMD_EXTRA="--compose-file $COMPOSE_FILE $STACK_NAME"
+        
+    elif [ $CMD = "rm" ];
+    then
+        CMD_EXTRA="$STACK_NAME"
+        
+    elif [ $CMD = "services" ];
+    then
+        CMD_EXTRA="$STACK_NAME"
+        
+    elif [ $CMD = "ps" ];
+    then
+        CMD_EXTRA="$STACK_NAME"
+    fi
+fi
+
+
+# set -x
+docker stack $CMD $CMD_EXTRA ${@:$ARG_OFFSET}
+# docker stack $CMD $CMD_EXTRA ${@:$ARG_OFFSET} #--compose-file $COMPOSE_FILE $@ #$STACK_NAME $@
+{ set +x; } 2>/dev/null
