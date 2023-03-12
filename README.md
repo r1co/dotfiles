@@ -17,6 +17,12 @@ bash <(curl -s https://raw.githubusercontent.com/r1co/dotfiles/master/install.sh
 ├─ tmux             # tmux config 
 ├─ wezterm          # wezterm config 
 ├─ zsh              # zsh config 
+|  ├─ .storage      # zsh runtime storage (not in git)
+|  ├─ aliases       # alias, loaded on startup 
+|  ├─ flags         # flags, loaded on startup 
+|  ├─ themes        # zsh themes  
+|  ├─ plugins       # zsh plugins  
+|  ├─ zsh-utils     # utils for managing zsh and dotfiles 
 │  ├─ vars.zsh      # global zsh variables 
 │  └─ zshrc.zsh     # zsh main config file 
 
@@ -46,16 +52,24 @@ All files in `$ZSH_ALIASES_CONFIG_ROOT` are automatically loaded on startup.
 
 Aliases can be defined in several ways: 
 
-* zsh alias: 
+* zsh alias
 
   `alias my-program=ls -la`
 
+* zsh function
+  
+  ```bash
+  function alias-fn(){
+    echo "Hello $1"
+  }
+  ```
+
 * common alias (alias that will be created on all platforms)
 
-  `defineCommonAlias date.week "date +%V"`
+  `dot.alias.define.common date.week "date +%V"`
 * linux alias
 
-  `defineLinuxAlias date.week "date +%V"`
+  `dot.alias.define.linux date.week "date +%V"`
 * osx alias
 
-  `defineOSXAlias date.week "date +%V"`
+  `dot.alias.define.osx date.week "date +%V"`

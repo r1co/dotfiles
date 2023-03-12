@@ -1,15 +1,12 @@
 
-# tmux commands
-
-
-defineLinuxAlias tmux.kill-server "tmux kill-server"
-defineLinuxAlias tmux.n "tmux new-session -d -s"
-defineLinuxAlias tmux.s "tmux switch-client -t "
-defineLinuxAlias tmux.switch="tmux switch-client -t "
-defineLinuxAlias tmux.res "tmux rename-session"
-defineLinuxAlias tmux.rew "tmux rename-window"
-defineLinuxAlias tmux.reload "tmux source-file ~/.tmux.conf \;" # tmux display-message "~/.tmux.conf reloaded""
-
+# tmux command
+dot.alias.define.linux tmux.kill-server "tmux kill-server"
+dot.alias.define.linux tmux.n "tmux new-session -d -s"
+dot.alias.define.linux tmux.s "tmux switch-client -t"
+dot.alias.define.linux tmux.switch "tmux switch-client -t"
+dot.alias.define.linux tmux.res "tmux rename-session"
+dot.alias.define.linux tmux.rew "tmux rename-window"
+dot.alias.define.linux tmux.reload "tmux source-file ~/.tmux.conf \;"
 
 function tmux.ns() {
     tmux has-session -t $session 2>/dev/null
@@ -21,9 +18,9 @@ function tmux.ns() {
 
 function tmux.kill() {
     if [ -z $1 ]; then
-      tmux kill-session
+        tmux kill-session
     else
-      tmux kill-session -t $1
+        tmux kill-session -t $1
     fi
 }
 

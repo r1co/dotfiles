@@ -1,6 +1,7 @@
 function $HANDLER_NAME(){
-    DEBUG "Check if check dotfiles update should run"
+    VERBOSE "Check if check dotfiles update should run"
     COUNTER_FILE="$ZSH_STORAGE_ROOT/update-check-counter"
+    CHECK_EVERY_N_STARTUPS=$(dot.config.get check_dotfiles_remote_every_n 10)
     
     # create counter if missing
     if [ ! -f "$COUNTER_FILE" ]; then
@@ -9,10 +10,10 @@ function $HANDLER_NAME(){
     
     COUNTER_VALUE=$(cat $COUNTER_FILE)
     
-    DEBUG "Startups since last update: $COUNTER_VALUE"
+    VERBOSE "Startups since last update: $COUNTER_VALUE"
     
     if [ "$COUNTER_VALUE" -le "$CHECK_EVERY_N_STARTUPS" ]; then
-        DEBUG "Check update every $CHECK_EVERY_N_STARTUPS startups, skip"
+        VERBOSE "Check update every $CHECK_EVERY_N_STARTUPS startups, skip"
         COUNTER_VALUE=$((COUNTER_VALUE + 1))
         echo $COUNTER_VALUE > $COUNTER_FILE
     else
@@ -29,5 +30,8 @@ function $HANDLER_NAME(){
         fi
         echo "0" > $COUNTER_FILE
     fi
-    
+}
+
+function ${HANDLER_NAME}_info(){
+    echo "Checks every n ($CHECK_EVERY_N_STARTUPS) starts if dotfiles can be updated. ($COUNTER_VALUE/$CHECK_EVERY_N_STARTUPS)"
 }

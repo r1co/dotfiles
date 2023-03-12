@@ -1,14 +1,74 @@
 
-# return
-## UTILS
-# webserver from current folder
-defineCommonAlias util.webserver 'python -m SimpleHTTPServer 8000'
-# Print each PATH entry on a separate line
-defineCommonAlias util.path 'echo -e ${PATH//:/\\n}'
-# unix timestamp
-defineCommonAlias util.ts 'date +"%s"'
-# URL-encode strings
-defineCommonAlias util.urlencode 'python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-# print term colours
-defineCommonAlias util.print-xterm256 'curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash'
+function dot.alias.define.common() {
+    name=$1
+    command=$2
+    
+    DEBUG_ALIASES "Add common alias $name"
+    alias $name=$command
+}
 
+function dot.alias.define.linux() {
+    name=$1
+    command=$2
+    
+    if [[ "$(isLinux)" == true ]]; then
+        DEBUG_ALIASES "Add linux alias $name"
+        alias $name=$command
+    else
+        DEBUG_ALIASES "Ignore alias $name for platform $(getPlatform)"
+    fi
+}
+
+function dot.alias.define.osx() {
+    name=$1
+    command=$2
+    
+    if [[ "$(isDarwin)" == true ]]; then
+        DEBUG_ALIASES "Add osx alias $name"
+        alias $name=$command
+    else
+        DEBUG_ALIASES "Ignore alias $name for platform $(getPlatform)"
+    fi
+}
+
+
+function loadAliases(){
+    # alias  helper functions
+    function dot.aliases(){
+        # ls  $ZSH_ALIASES_CONFIG_ROOT | xargs -I{} echo "├─ {}"
+        for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
+            echo "├─ $(basename $file)"
+            cat $file | grep -e "dot.alias.define.common" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (common)"
+            cat $file | grep -e "dot.alias.define.linux" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (linux)"
+            cat $file | grep -e "dot.alias.define.osx" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (osx)"
+            cat $file | grep -e "function "  |xargs -L1 | cut -d" " -f2 | xargs  -I{}  echo "|  ├─ {} (function)"
+        done
+        
+        #
+    }
+    # load all aliases in folder
+    for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
+        DEBUG "Parse aliases in $file"
+        source $file
+    done
+}
+function loadAliases(){
+    # alias  helper functions
+    function dot.aliases(){
+        # ls  $ZSH_ALIASES_CONFIG_ROOT | xargs -I{} echo "├─ {}"
+        for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
+            echo "├─ $(basename $file)"
+            cat $file | grep -e "dot.alias.define.common" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (common)"
+            cat $file | grep -e "dot.alias.define.linux" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (linux)"
+            cat $file | grep -e "dot.alias.define.osx" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (osx)"
+            cat $file | grep -e "function "  |xargs -L1 | cut -d" " -f2 | xargs  -I{}  echo "|  ├─ {} (function)"
+        done
+        
+        #
+    }
+    # load all aliases in folder
+    for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
+        DEBUG "Parse aliases in $file"
+        source $file
+    done
+}

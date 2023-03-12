@@ -3,6 +3,6 @@ function $HANDLER_NAME(){
 }
 
 function ${HANDLER_NAME}_info(){
-    echo "Enables debugging for dotfiles"
+    echo "Enables verbose logging for dotfiles"
 }
 

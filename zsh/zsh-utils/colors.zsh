@@ -1,17 +1,41 @@
+COLOR_RESET='\033[0m'
+
+RED='\033[00;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+LIGHTGRAY='\033[00;37m'
+WHITE='\033[00;37m'
+
+LRED='\033[01;31m'
+LGREEN='\033[01;32m'
+LYELLOW='\033[01;33m'
+LBLUE='\033[01;34m'
+LPURPLE='\033[01;35m'
+LCYAN='\033[01;36m'
+LWHITE='\033[01;37m'
+
+IRED='\033[03;31m'
+IGREEN='\033[03;32m'
+IYELLOW='\033[03;33m'
+IBLUE='\033[03;34m'
+IPURPLE='\033[03;35m'
+ICYAN='\033[03;36m'
+IWHITE='\033[03;37m'
+
 function printRed(){
-    COLOR='\033[0;31m'
-    NC='\033[0m' # No Color
-    echo "${COLOR}$@${NC}"
+    COLOR=$RED
+    echo "${COLOR}$@${COLOR_RESET}"
 }
 
 function printBlue(){
-    COLOR='\033[0;34m'
-    NC='\033[0m' # No Color
-    echo "${COLOR}$@${NC}"
+    COLOR=$BLUE
+    echo "${COLOR}$@${COLOR_RESET}"
 }
 
 function printYellow(){
-    COLOR='\033[0;33m'
-    NC='\033[0m' # No Color
-    echo "${COLOR}$@${NC}"
+    COLOR=$YELLOW
+    echo "${COLOR}$@${COLOR_RESET}"
 }
