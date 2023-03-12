@@ -32,6 +32,15 @@ function dot.config.reset() {
     mkdir -p $OPTIONS_ROOT
 }
 
+function dot.config.list(){
+    local result=""
+    for file in $(find $OPTIONS_ROOT -name "*" -type f); do
+        name=$(basename $file)
+        result="${result}\n$name - $(dot.config.get $name)"
+    done
+    echo $result | column -t -s' '
+}
+
 # setup config environment
 function dot.config.setup() {
     DEBUG "LOAD OPTIONS!"
