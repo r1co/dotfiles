@@ -1,46 +1,61 @@
-# README _WIP_ #
+# `.files`
 
-Configuration for zsh and tmux.
+My dotfiles. 
 
 ## Install
 ```
 bash <(curl -s https://raw.githubusercontent.com/r1co/dotfiles/master/install.sh) 
 ```
 
-## File Structure 
+### File Structure 
 ```
 .
-+-- aliases.zsh 	# zsh aliases 
-+-- colors.zsh  	# colors and color switch aliases 
-+-- tmux.conf   	# tmux config
-+-- vars.zsh    	# other variables
-+-- functions.zsh   # helper functions 
-+-- themes 			
-|   +-- default.zsh # default theme 
-+-- flags # enable / disable functionality by adding files 
+├─ install.sh       # install dotfiles 
+├─ uninstall.sh     # uninstall dotfiles 
+├─ git              # git config 
+├─ scripts          # scripts that are added to $PATH 
+├─ tmux             # tmux config 
+├─ wezterm          # wezterm config 
+├─ zsh              # zsh config 
+│  ├─ vars.zsh      # global zsh variables 
+│  └─ zshrc.zsh     # zsh main config file 
 
 ```
 
-## Hostname themes 
-You can define custom themes for specific hostnames. 
+## ZSH
+### **Flags** 
 
-### Add custom theme
+Flags can be used to apply zsh config or execute any kind of shell script on startup.
+
+Flags are only executed if the corresponding flag enable file exists. 
+
+To add a new flag put a file containing a `$HANDLER_NAME` function in `$ZSH_FLAG_CONFIG_ROOT`. 
+
+This will create a new flag named like the file. 
+
+Example flag:
 ```bash
-`touch /.dotfiles`/themes/$(hostname).zsh
+function $HANDLER_NAME(){
+    echo "This flag says hello if enabled"
+}
 ```
 
-You can now override variables defined in `themes/default.zsh`
+### **Aliases**
 
-## Workspaces 
+All files in `$ZSH_ALIASES_CONFIG_ROOT` are automatically loaded on startup. 
 
-- `w` switches to workspace (`cd $WORKSPACE`).
-- `ws.set` set the current location as workspace.
-- `ws.setpath <path>` set path as workspace 
-- `ws.print` print the current workspace path  
+Aliases can be defined in several ways: 
 
-## Autostart tmux 
+* zsh alias: 
 
-Touch `~/.dotfiles/flags/tmux_autostart.flag` to enable tmux autostart 
+  `alias my-program=ls -la`
 
-## Env Flags 
-$DOTFILES_DISABLE_TMUX=1
+* common alias (alias that will be created on all platforms)
+
+  `defineCommonAlias date.week "date +%V"`
+* linux alias
+
+  `defineLinuxAlias date.week "date +%V"`
+* osx alias
+
+  `defineOSXAlias date.week "date +%V"`

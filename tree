@@ -1,0 +1,87 @@
+.
+├─ .gitignore
+├─ README.md
+├─ install.sh
+├─ tree
+├─ uninstall.sh
+├─ flags
+│  ├─ .placeholder
+│  ├─ checkDotfilesDirty.zsh.flag
+│  ├─ checkDotfilesUpdateCheck.zsh.flag
+│  ├─ ctrl-arrow-fix.zsh.flag
+│  ├─ debug.zsh.flag
+│  ├─ tmux-autostart-new-session.zsh.flag
+│  └─ tmux-autostart.zsh.flag
+├─ scripts
+│  ├─ d.stack
+│  ├─ docker
+│  └─ find-docker-context
+├─ tmux
+│  └─ tmux.conf
+├─ wezterm
+│  └─ wezterm.lua
+├─ zsh
+│  ├─ vars.zsh
+│  └─ zshrc.zsh
+├─ tmux
+│  ├─ config
+│  │  ├─ colors.sh
+│  │  ├─ common.sh
+│  │  ├─ helper.sh
+│  │  └─ styles.sh
+│  ├─ info-scripts
+│  │  ├─ tmuxCpuInfo.sh
+│  │  ├─ tmuxMemInfo.sh
+│  │  ├─ tmuxNetworkInfo.sh
+│  │  └─ tmuxUptimeInfo.sh
+│  └─ scripts
+│     ├─ disable.sh
+│     ├─ enable.sh
+│     ├─ startup.sh
+│     ├─ statusBarLeft.sh
+│     └─ statusBarRight.sh
+├─ zsh
+│  ├─ .storage
+│  │  └─ update-check-counter
+│  ├─ aliases
+│  │  ├─ .placeholder
+│  │  ├─ date.zsh
+│  │  ├─ docker.zsh
+│  │  ├─ dotfiles.zsh
+│  │  ├─ find.zsh
+│  │  ├─ network.zsh
+│  │  ├─ passwords.zsh
+│  │  ├─ system.zsh
+│  │  ├─ tmux.zsh
+│  │  ├─ utils.zsh
+│  │  └─ zsh.zsh
+│  ├─ flags
+│  │  ├─ .placeholder
+│  │  ├─ autostartTMux.flaghandler.zsh
+│  │  ├─ checkDotfilesDirty.flaghandler.zsh
+│  │  ├─ checkDotfilesUpdateCheck.flaghandler.zsh
+│  │  ├─ ctrl-arrow-fix.flaghandler.zsh
+│  │  ├─ debug-aliases.flaghandler.zsh
+│  │  └─ debug.flaghandler.zsh
+│  ├─ host-config
+│  │  ├─ .placeholder
+│  │  ├─ fedora.zsh
+│  │  └─ lz-mb-24zmd6t.zsh
+│  ├─ themes
+│  │  └─ dot.zsh-theme
+│  └─ zsh-utils
+│     ├─ aliases.zsh
+│     ├─ colors.zsh
+│     ├─ debug.zsh
+│     ├─ flags.zsh
+│     └─ utils.zsh
+├─ git
+│  └─ templates
+│     └─ hooks
+│        └─ prepare-commit-msg
+└─ zsh
+   └─ plugins
+      ├─ autosuggestions
+      │  └─ zsh-autosuggestions.zsh
+      └─ bd
+         └─ bd.zsh
