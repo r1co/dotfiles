@@ -1,21 +1,22 @@
 function $HANDLER_NAME(){
     VERBOSE "Check if check dotfiles update should run"
-    COUNTER_FILE="$ZSH_STORAGE_ROOT/update-check-counter"
+    # COUNTER_FILE="$ZSH_STORAGE_ROOT/update-check-counter"
     CHECK_EVERY_N_STARTUPS=$(dot.config.get check_dotfiles_remote_every_n 10)
     
-    # create counter if missing
-    if [ ! -f "$COUNTER_FILE" ]; then
-        echo "0" > $COUNTER_FILE
-    fi
+    # # create counter if missing
+    # if [ ! -f "$COUNTER_FILE" ]; then
+    #     echo "0" > $COUNTER_FILE
+    # fi
     
-    COUNTER_VALUE=$(cat $COUNTER_FILE)
+    COUNTER_VALUE=$(dot.config.get check_dotfiles_counter 0)
     
     VERBOSE "Startups since last update: $COUNTER_VALUE"
     
     if [ "$COUNTER_VALUE" -le "$CHECK_EVERY_N_STARTUPS" ]; then
         VERBOSE "Check update every $CHECK_EVERY_N_STARTUPS startups, skip"
         COUNTER_VALUE=$((COUNTER_VALUE + 1))
-        echo $COUNTER_VALUE > $COUNTER_FILE
+        # echo $COUNTER_VALUE > $COUNTER_FILE
+        dot.config.set check_dotfiles_counter $COUNTER_VALUE
     else
         # check if there are dotfile updates available (slows down zsh startup)
         printBlue "Check if dotfiles update available"
@@ -28,7 +29,9 @@ function $HANDLER_NAME(){
         else
             printBlue "No updates available"
         fi
-        echo "0" > $COUNTER_FILE
+        # echo "0" > $COUNTER_FILE
+        dot.config.set check_dotfiles_counter 0
+        
     fi
 }
 
