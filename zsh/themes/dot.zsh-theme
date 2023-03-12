@@ -2,14 +2,19 @@
 
 autoload -Uz compinit; compinit
 
-# ICONS
-local ICON_local='⌂'
-local ICON_remote='🖧'
-
 # LOCAL/VARIABLES/ANSI =========================================================
 
 local ANSI_reset="\x1B[0m"
 local ANSI_dim_black="\x1B[38;05;236m"
+
+local COLOR_green="\e[32m"
+local COLOR_grey="\e[90m"
+local ENDCOLOR="\e[0m"
+
+# ICONS ========================================================================
+local ICON_local="${COLOR_grey}⦿${ENDCOLOR}"
+local ICON_remote="${COLOR_green}⦿${ENDCOLOR}"
+
 
 # LOCAL/VARIABLES/GRAPHIC ======================================================
 
@@ -98,7 +103,7 @@ printPsOneLimiter() {
     local spacing=""
     
     local env_icon=$ssh_marker
-    local hostname=$(hostname)
+    local hostname="[$(hostname)]"
     
     ((termwidth = ${COLUMNS} - ${#hostname} - 3))
     
