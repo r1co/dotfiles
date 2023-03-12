@@ -2,6 +2,10 @@
 
 autoload -Uz compinit; compinit
 
+# ICONS
+local ICON_local='⌂'
+local ICON_remote='🖧'
+
 # LOCAL/VARIABLES/ANSI =========================================================
 
 local ANSI_reset="\x1B[0m"
@@ -73,10 +77,10 @@ esac
 
 # SEGMENT/SSH_STATUS ===========================================================
 
-local ssh_marker=""
+local ssh_marker="$ICON_local"
 
 if [[ -n "$SSH_CLIENT" || -n "$SSH2_CLIENT" ]]; then
-    ssh_marker="%F{115}SSH%f%F{236}:%f"
+    ssh_marker="$ICON_remote"
 fi
 
 # UTILS ========================================================================
@@ -93,18 +97,21 @@ printPsOneLimiter() {
     local termwidth
     local spacing=""
     
-    ((termwidth = ${COLUMNS} - 1))
+    local env_icon=$ssh_marker
+    local hostname=$(hostname)
+    
+    ((termwidth = ${COLUMNS} - ${#hostname} - 3))
     
     for i in {1..$termwidth}; do
         spacing="${spacing}${char_vertical_divider}"
     done
     
-    echo $ANSI_dim_black$char_down_and_right_divider$spacing$ANSI_reset
+    echo $ANSI_dim_black$char_down_and_right_divider$ANSI_reset$env_icon $hostname$ANSI_dim_black$spacing$ANSI_reset
 }
 
 # ENV/VARIABLES/PROMPT_LINES ===================================================
 
-PROMPT="%F{236}${char_up_and_right_divider} ${ssh_marker} %f%F{80}%~%f$(prepareGitStatusLine)
+PROMPT="%F{236}${char_up_and_right_divider} %f%F{80}%~%f$(prepareGitStatusLine)
 %F{85} ${char_arrow}%f "
 
 RPROMPT=""
