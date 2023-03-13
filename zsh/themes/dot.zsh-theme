@@ -103,7 +103,7 @@ printPsOneLimiter() {
     local spacing=""
     
     local env_icon=$ssh_marker
-    local hostname="[$(hostname)]"
+    local hostname="${COLOR_green}$(hostname)${ENDCOLOR}"
     
     ((termwidth = ${COLUMNS} - ${#hostname} - 3))
     
@@ -111,7 +111,7 @@ printPsOneLimiter() {
         spacing="${spacing}${char_vertical_divider}"
     done
     
-    echo $ANSI_dim_black$char_down_and_right_divider$ANSI_reset$env_icon $hostname$ANSI_dim_black$spacing$ANSI_reset
+    echo "\n"$ANSI_dim_black$char_down_and_right_divider$ANSI_reset$env_icon $hostname$ANSI_dim_black$spacing$ANSI_reset
 }
 
 # ENV/VARIABLES/PROMPT_LINES ===================================================
