@@ -64,7 +64,6 @@ case "$VCS" in
     
     # hg sepecific
     "hg")
-        # echo "ставим hg переменные для vcs_info"
         zstyle ':vcs_info:hg:*' branchformat "%b"
         zstyle ':vcs_info:hg:*' formats " ${char_badge} ${vc_branch_name}"
     ;;
@@ -116,7 +115,9 @@ printPsOneLimiter() {
 
 # ENV/VARIABLES/PROMPT_LINES ===================================================
 
-PROMPT="%F{236}${char_up_and_right_divider} %f%F{80}%~%f$(prepareGitStatusLine)
+local cwd="%~"
+
+PROMPT="%F{236}${char_up_and_right_divider} %f%F{80}${cwd}%f$(prepareGitStatusLine)
 %F{85} ${char_arrow}%f"
 
 RPROMPT=""

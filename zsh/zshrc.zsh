@@ -22,14 +22,16 @@ mkdir -p $ZSH_STORAGE_ROOT
 # add scripts dir to path
 export PATH="$DOTFILES_ROOT/scripts:$PATH"
 
-# load theme
-source $ZSH_ROOT/themes/dot.zsh-theme
 
 # setup mods
 dot.config.setup
 dot.plugin.setup
 dot.flag.setup
 dot.alias.setup
+
+# load theme
+source $ZSH_ROOT/themes/dot.zsh-theme
+# source $ZSH_ROOT/themes/new-theme.zsh-theme
 
 
 
