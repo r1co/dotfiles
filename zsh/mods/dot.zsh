@@ -12,7 +12,7 @@ function dot.save(){
     if [ -n "${1+1}" ]; then
         cd $DOTFILES_ROOT
         git add *
-        git commit -m "$@"
+        git commit -m "update dotfiles"
         git push
     else
         printRed "Please provide commit message"
