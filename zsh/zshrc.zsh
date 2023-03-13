@@ -6,6 +6,7 @@ source $ZSH_ROOT/vars.zsh
 source $ZSH_ROOT/mods/config.zsh
 source $ZSH_ROOT/mods/plugins.zsh
 source $ZSH_ROOT/mods/flags.zsh
+source $ZSH_ROOT/mods/dot.zsh
 
 source $ZSH_ROOT/zsh-utils/utils.zsh
 source $ZSH_ROOT/zsh-utils/log.zsh
