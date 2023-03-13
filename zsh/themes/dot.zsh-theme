@@ -103,7 +103,7 @@ printPsOneLimiter() {
     local spacing=""
     
     local env_icon=$ssh_marker
-    local hostname="${COLOR_green}$(hostname)${ENDCOLOR}"
+    local hostname="$(hostname)"
     
     ((termwidth = ${COLUMNS} - ${#hostname} - 3))
     
@@ -111,23 +111,23 @@ printPsOneLimiter() {
         spacing="${spacing}${char_vertical_divider}"
     done
     
-    echo "\n"$ANSI_dim_black$char_down_and_right_divider$ANSI_reset$env_icon $hostname$ANSI_dim_black$spacing$ANSI_reset
+    echo "\n"$ANSI_dim_black$char_down_and_right_divider$ANSI_reset$env_icon $COLOR_green$hostname$COLOREND$ANSI_dim_black$spacing$ANSI_reset
 }
 
 # ENV/VARIABLES/PROMPT_LINES ===================================================
 
 PROMPT="%F{236}${char_up_and_right_divider} %f%F{80}%~%f$(prepareGitStatusLine)
-%F{85} ${char_arrow}%f "
+%F{85} ${char_arrow}%f"
 
 RPROMPT=""
 
 # ENV/HOOKS ====================================================================
 
 precmd() {
-  if [[ $VCS != "" ]]; then
-    vcs_info
-  fi
-  printPsOneLimiter
+    if [[ $VCS != "" ]]; then
+        vcs_info
+    fi
+    printPsOneLimiter
 }
 
 # ENV/VARIABLES/LS_COLORS ======================================================
