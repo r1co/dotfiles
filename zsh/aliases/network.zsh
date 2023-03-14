@@ -1,74 +1,27 @@
+# network
+dot.alias.define.common ip.all '{echo extern $(ip.ext); ip route | cut -d" " -f3,6,9 | grep scope | cut -d" " -f1,3} | column -t'
+dot.alias.define.common ip.ext 'curl -s ipinfo.io/ip'
+dot.alias.define.common ip.lan 'net.status | grep ethernet | cut -d" " -f1 | xargs -i zsh -c "ip route | grep {} | grep scope | cut -d\" \" -f9"'
+dot.alias.define.common ip.wifi 'net.status | grep wifi | cut -d" " -f1 | xargs -i zsh -c "ip route | grep {} | grep scope | cut -d\" \" -f9"'
+dot.alias.define.common ip.scan 'nmap -sP '
+dot.alias.define.common net.status 'nmcli device status'
+dot.alias.define.common net.connections 'nmcli connection show'
+dot.alias.define.common net.routes 'ip route | column -t'
 
-function dot.alias.define.common() {
-    name=$1
-    command=$2
-    
-    DEBUG_ALIASES "Add common alias $name"
-    alias $name=$command
-}
-
-function dot.alias.define.linux() {
-    name=$1
-    command=$2
-    
-    if [[ "$(isLinux)" == true ]]; then
-        DEBUG_ALIASES "Add linux alias $name"
-        alias $name=$command
+# dns
+function dig.rootNS() {
+  ROOT_SERVER=$(dig NS +noadditional +noquestion +nocomments +nocmd +nostats | head -1 | xargs -L1 | cut -d' ' -f5)
+  echo "> $ROOT_SERVER"
+  FIRST_LEVEL_DNS=$(dig NS +noadditional +noquestion +nocomments +nocmd +nostats @$ROOT_SERVER $1 | head -1 | xargs -L1 | cut -d' ' -f5)
+  echo ">> $FIRST_LEVEL_DNS"
+  NS_SERVER=$(dig  +noquestion +nocomments +nocmd +nostats @$FIRST_LEVEL_DNS $1 | grep NS | xargs -L1 | cut -d' ' -f5);
+  echo $NS_SERVER | while read ns_server ; do
+    GLUE_RECORD=$(dig  +noquestion +nocomments +nocmd +nostats @$FIRST_LEVEL_DNS $1 | grep A | grep $ns_server |  xargs -L1 | cut -d' ' -f5)
+    if [ ! -z "$GLUE_RECORD" ]
+    then
+      echo ">>> $ns_server ($(echo $GLUE_RECORD |  tr '\n' ' ' | xargs -L1))"
     else
-        DEBUG_ALIASES "Ignore alias $name for platform $(getPlatform)"
+      echo ">>> $ns_server"
     fi
-}
-
-function dot.alias.define.osx() {
-    name=$1
-    command=$2
-    
-    if [[ "$(isDarwin)" == true ]]; then
-        DEBUG_ALIASES "Add osx alias $name"
-        alias $name=$command
-    else
-        DEBUG_ALIASES "Ignore alias $name for platform $(getPlatform)"
-    fi
-}
-
-
-function loadAliases(){
-    # alias  helper functions
-    function dot.aliases(){
-        # ls  $ZSH_ALIASES_CONFIG_ROOT | xargs -I{} echo "├─ {}"
-        for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
-            echo "├─ $(basename $file)"
-            cat $file | grep -e "dot.alias.define.common" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (common)"
-            cat $file | grep -e "dot.alias.define.linux" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (linux)"
-            cat $file | grep -e "dot.alias.define.osx" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (osx)"
-            cat $file | grep -e "function "  |xargs -L1 | cut -d" " -f2 | xargs  -I{}  echo "|  ├─ {} (function)"
-        done
-        
-        #
-    }
-    # load all aliases in folder
-    for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
-        DEBUG "Parse aliases in $file"
-        source $file
-    done
-}
-function loadAliases(){
-    # alias  helper functions
-    function dot.aliases(){
-        # ls  $ZSH_ALIASES_CONFIG_ROOT | xargs -I{} echo "├─ {}"
-        for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
-            echo "├─ $(basename $file)"
-            cat $file | grep -e "dot.alias.define.common" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (common)"
-            cat $file | grep -e "dot.alias.define.linux" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (linux)"
-            cat $file | grep -e "dot.alias.define.osx" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (osx)"
-            cat $file | grep -e "function "  |xargs -L1 | cut -d" " -f2 | xargs  -I{}  echo "|  ├─ {} (function)"
-        done
-        
-        #
-    }
-    # load all aliases in folder
-    for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
-        DEBUG "Parse aliases in $file"
-        source $file
-    done
+  done
 }
