@@ -13,6 +13,7 @@ function dot.save(){
         cd $DOTFILES_ROOT
         git add *
         git commit -m "$*"
+        git pull
         git push
     else
         printRed "Please provide commit message"
