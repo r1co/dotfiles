@@ -1,6 +1,8 @@
 source $HOME/.dotfiles/zsh/zshrc.zsh
 
-
+# nvm compinit
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # global yarn
 export PATH="$PATH:`yarn global bin`"
@@ -27,9 +29,7 @@ alias gitkraken="flatpak run com.axosoft.GitKraken"
 alias open="flatpak run re.sonny.Junction"
 alias wezterm='flatpak run org.wezfurlong.wezterm'
 
-# nvm compinit
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 
 # jenv
 # export PATH="$HOME/.jenv/bin:$PATH"

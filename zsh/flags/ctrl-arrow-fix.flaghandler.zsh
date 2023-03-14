@@ -1,5 +1,5 @@
 function $HANDLER_NAME(){
-    VERBOSE "Enabled delete word on 'ctrl + backspace"
+    VERBOSE "Fix ctrl -> / ctrl <- using bindkeys"
     
     # fix ctrl + -> <-
     bindkey "^[[1;5C" forward-word
@@ -7,5 +7,5 @@ function $HANDLER_NAME(){
 }
 
 function ${HANDLER_NAME}_info(){
-    echo "Enable delete word on 'ctrl + backspace'"
+    echo "Fixes 'ctrl + <-' / 'ctrl + ->' in terminal using bindkey."
 }
