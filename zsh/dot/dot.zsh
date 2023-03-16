@@ -1,11 +1,8 @@
 
 if [ -z ${DOT_PREFIX+x} ];
 then
-    DOT_PREFIX="dot"
+    DOT_PREFIX=".dot"
 fi
-
-echo "DOT_PREFIX: $DOT_PREFIX"
-
 
 source $(dirname $0)/utils/colors.zsh
 source $(dirname $0)/utils/utils.zsh

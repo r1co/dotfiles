@@ -1,5 +1,5 @@
 
-function ${DOT_PREFIX}.alias.define.common() {
+function common_alias() {
     name=$1
     command=$2
     
@@ -7,7 +7,7 @@ function ${DOT_PREFIX}.alias.define.common() {
     alias $name=$command
 }
 
-function ${DOT_PREFIX}.alias.define.linux() {
+function linux_alias() {
     name=$1
     command=$2
     
@@ -19,7 +19,7 @@ function ${DOT_PREFIX}.alias.define.linux() {
     fi
 }
 
-function ${DOT_PREFIX}.alias.define.osx() {
+function osx_alias() {
     name=$1
     command=$2
     
@@ -35,9 +35,9 @@ function ${DOT_PREFIX}.alias.list(){
     # ls  $ZSH_ALIASES_CONFIG_ROOT | xargs -I{} echo "├─ {}"
     for file in $(find $ZSH_ALIASES_CONFIG_ROOT -name "*.zsh" -type f); do
         echo "├─ $(basename $file)"
-        cat $file | grep -e "${DOT_PREFIX}.alias.define.common" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (common)"
-        cat $file | grep -e "${DOT_PREFIX}.alias.define.linux" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (linux)"
-        cat $file | grep -e "${DOT_PREFIX}.alias.define.osx" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (osx)"
+        cat $file | grep -e "common_alias" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (common)"
+        cat $file | grep -e "linux_alias" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (linux)"
+        cat $file | grep -e "osx_alias" | cut -d" " -f2 | xargs -I{} echo "|  ├─ {} (osx)"
         cat $file | grep -e "function "  |xargs -L1 | cut -d" " -f2 | xargs  -I{}  echo "|  ├─ {} (function)"
     done
     
