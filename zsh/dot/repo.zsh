@@ -1,14 +1,14 @@
-function dot.update() {
+function ${DOT_PREFIX}.update() {
     cd $DOTFILES_ROOT
     git pull
 }
 
-function dot.status() {
+function ${DOT_PREFIX}.status() {
     cd $DOTFILES_ROOT
     git status
 }
 
-function dot.save(){
+function ${DOT_PREFIX}.save(){
     if [ -n "${1+1}" ]; then
         cd $DOTFILES_ROOT
         git add *
