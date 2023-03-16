@@ -1,3 +1,3 @@
 # system
-dot.alias.define.common sys.ports 'sudo netstat -tulanp'
-dot.alias.define.common sys.pid 'getPidAndCommand'
+common_alias sys.ports 'sudo netstat -tulanp'
+common_alias sys.pid 'getPidAndCommand'
