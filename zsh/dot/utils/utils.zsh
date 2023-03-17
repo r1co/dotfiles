@@ -33,3 +33,11 @@ function isLinux() {
     echo false
     return false
 }
+
+function addPath(){
+    export PATH="$PATH:$1"
+}
+
+function addPathStart(){
+    export PATH="$1:$PATH"
+}

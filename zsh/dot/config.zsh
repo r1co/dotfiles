@@ -9,7 +9,6 @@ function ${DOT_PREFIX}.config.get() {
     local default_value=$2
     local config_file="$OPTIONS_ROOT/$config_key"
     if ! test -f "$config_file"; then
-        # DEBUG "[OPTIONS] Config $config_key does not exist. Create default."
         echo $default_value > $config_file
     fi
     
@@ -41,7 +40,7 @@ function ${DOT_PREFIX}.config.list(){
         name=$(basename $file)
         result="${result}\n$name - $(${DOT_PREFIX}.config.get $name)"
     done
-    echo $result | column -t -s' '
+    echo $result | column -t -s' ' | sort
 }
 
 # setup config environment
