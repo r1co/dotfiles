@@ -78,26 +78,26 @@ ${DOT_PREFIX}.module.list(){
 }
 
 ${DOT_PREFIX}.module.enable(){
-    PACKAGE_NAME=$1
-    MODULE_NAME=$2
+    
+    MODULE_NAME=$1
     
     if [ "$#" -eq 2 ]; then
-        enabled=$(${DOT_PREFIX}.config.get "$PACKAGE_NAME.$MODULE_NAME.enabled" true)
+        enabled=$(${DOT_PREFIX}.config.get "$MODULE_NAME.enabled" true)
         echo "$enabled => true"
-        ${DOT_PREFIX}.config.set "$PACKAGE_NAME.$MODULE_NAME.enabled" true
+        ${DOT_PREFIX}.config.set "$MODULE_NAME.enabled" true
         
         for module in ${dot_modules[@]}; do
             module_name=$(echo $module | cut -d":" -f1)
             module_file=$(echo $module | cut -d":" -f2)
-            if [ $module_name = "$PACKAGE_NAME.$MODULE_NAME" ];
+            if [ $module_name = "$MODULE_NAME" ];
             then
                 local on_enable_file="${module_file/".zsh"/""}-on-enable.zsh"
                 if test -f "$on_enable_file"; then
                     # _dot.load-module $PACKAGE_NAME $name $file
-                    DEBUG "Run on-enable file for $PACKAGE_NAME.$MODULE_NAME"
+                    DEBUG "Run on-enable file for $MODULE_NAME"
                     source $on_enable_file
                 else
-                    DEBUG "No on-enable file for $PACKAGE_NAME.$MODULE_NAME"
+                    DEBUG "No on-enable file for $MODULE_NAME"
                 fi
             fi
         done
@@ -106,26 +106,25 @@ ${DOT_PREFIX}.module.enable(){
     fi
 }
 ${DOT_PREFIX}.module.disable(){
-    PACKAGE_NAME=$1
-    MODULE_NAME=$2
+    MODULE_NAME=$1
     
     if [ "$#" -eq 2 ]; then
-        enabled=$(${DOT_PREFIX}.config.get "$PACKAGE_NAME.$MODULE_NAME.enabled" false)
+        enabled=$(${DOT_PREFIX}.config.get "$MODULE_NAME.enabled" false)
         echo "$enabled => false"
-        ${DOT_PREFIX}.config.set "$PACKAGE_NAME.$MODULE_NAME.enabled" false
+        ${DOT_PREFIX}.config.set "$MODULE_NAME.enabled" false
         
         for module in ${dot_modules[@]}; do
             module_name=$(echo $module | cut -d":" -f1)
             module_file=$(echo $module | cut -d":" -f2)
-            if [ $module_name = "$PACKAGE_NAME.$MODULE_NAME" ];
+            if [ $module_name = "$MODULE_NAME" ];
             then
                 local on_disable_file="${module_file/".zsh"/""}-on-disable.zsh"
                 if test -f "$on_disable_file"; then
                     # _dot.load-module $PACKAGE_NAME $name $file
-                    DEBUG "Run on-disable file for $PACKAGE_NAME.$MODULE_NAME"
+                    DEBUG "Run on-disable file for $MODULE_NAME"
                     source $on_disable_file
                 else
-                    DEBUG "No on-disable file for $PACKAGE_NAME.$MODULE_NAME"
+                    DEBUG "No on-disable file for $MODULE_NAME"
                 fi
             fi
         done
