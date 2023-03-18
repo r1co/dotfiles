@@ -1,6 +1,6 @@
 
 function ${DOT_PREFIX}.theme.load(){
-    THEME=$(.dot.config.get zsh.theme "dot")
+    THEME=$(.dot.config.get zsh.theme "zstyle")
     
     THEME_PATH="$THEME_ROOT/$THEME.zsh-theme"
     

@@ -34,6 +34,13 @@
 
 CURRENT_BG='NONE'
 
+
+autoload -Uz compinit; compinit
+autoload -Uz vcs_info
+eval zstyle $current_vcs
+zstyle ':vcs_info:*' get-revision true
+zstyle ':vcs_info:*' check-for-changes true
+
 case ${SOLARIZED_THEME:-dark} in
     light) CURRENT_FG='white';;
     *)     CURRENT_FG='black';;
@@ -252,6 +259,10 @@ prompt_aws() {
         *-prod|*production*) prompt_segment red yellow  "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
         *) prompt_segment green black "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
     esac
+}
+
+precmd() {
+    vcs_info
 }
 
 ## Main prompt

@@ -1,7 +1,12 @@
 local wezterm = require 'wezterm';
 
+local customTheme = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
+customTheme.background = "#000000"
 
 return {
+    color_schemes = {
+        ["WezTheme"] = customTheme,
+      },
     font_size = 10,
     font = wezterm.font('JetBrains Mono', {italic = false, harfbuzz_features = {'calt=0', 'clig=0', 'liga=0'}}),
     default_cursor_style = "BlinkingUnderline",
