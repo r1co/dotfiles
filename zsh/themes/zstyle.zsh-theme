@@ -115,7 +115,7 @@ prompt_end() {
 
 prompt_context() {
     if [[ -n "$SSH_CLIENT" ]]; then
-        next_segment "%(!.%{%F{yellow}%}.)%n@%m "
+        next_segment "%(!.%{%F{yellow}%}.)SSH %n@%m "
     else
         next_segment "%n@%m "
     fi
