@@ -1,32 +1,29 @@
 
 local function __log() {
-    COLOR=$1
-    NC='\033[0m'
-    enabled=$(${DOT_PREFIX}.config.get "log.$2.enabled" false)
+    local color=("$1")
+    local logger_name=$2
+    local message="${@:3}"
+    enabled=$(${DOT_PREFIX}.config.get "log.$logger_name.enabled" false)
     if [ $enabled = "true" ];
     then
-        echo "${COLOR}[$2] ${@:3}$NC"
+        print_color $color "[$logger_name] $message"
     fi
 }
 
 # print only if debug flag is set
 function DEBUG () {
-    # do not use dot.flag.check here!!!
-    __log $BLUE "debug" "$@"
+    __log $COLOR_INFO "debug" "$@"
 }
 function DEBUG_ALIASES () {
-    # do not use dot.flag.check here!!!
-    __log $BLUE "debug-aliases" "$@"
+    __log $COLOR_INFO "debug-aliases" "$@"
 }
 # print only if verbose flag is set
 function VERBOSE () {
-    # do not use dot.flag.check here!!!
-    __log $CYAN "verbose" "$@"
+    __log $COLOR_ACCENT "verbose" "$@"
     
 }
-
 function INFO() {
-    __log $YELLOW "info" "$@"
+    __log $COLOR_INFO "info" "$@"
     
 }
 
