@@ -117,7 +117,7 @@ prompt_context() {
     if [[ -n "$SSH_CLIENT" ]]; then
         next_segment "%(!.%{%F{yellow}%}.)SSH %n@%m "
     else
-        next_segment "%n@%m "
+        next_segment "@%m "
     fi
 }
 
@@ -148,7 +148,8 @@ build_prompt() {
     prompt_context
     prompt_dir
     prompt_git
-    next_segment "$(date.simple)"
+    # next_segment "NPM"
+    # next_segment "DOCKER"
     prompt_end
 }
 
@@ -194,15 +195,15 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 export VCS="git"
 
 local current_vcs="\":vcs_info:*\" enable $VCS"
-local char_badge="%F{250} 𝗈𝗇 %f%F{250}${char_arrow}%f"
-local vc_branch_name="%F{250}%b%f"
+local char_badge=""
+local vc_branch_name="\uE0A0 %b"
 
 local vc_action="%F{238}%a %f%F{236}${char_arrow}%f"
-local vc_unstaged_status="%F{250} M ${char_arrow}%f"
+local vc_unstaged_status="\u270E"
 
-local vc_git_staged_status="%F{115} A ${char_arrow}%f"
+local vc_git_staged_status="\u2a"
 local vc_git_hash="%F{151}%6.6i%f %F{236}${char_arrow}%f"
-local vc_git_untracked_status="%F{74} U ${char_arrow}%f"
+vc_git_untracked_status="+"
 
 eval zstyle $current_vcs
 zstyle ':vcs_info:*' get-revision true
@@ -212,8 +213,8 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*+set-message:*' hooks use_git_untracked
 zstyle ':vcs_info:git:*' stagedstr $vc_git_staged_status
 zstyle ':vcs_info:git:*' unstagedstr $vc_unstaged_status
-zstyle ':vcs_info:git:*' actionformats "  ${vc_action} ${vc_git_hash}%m%u%c${char_badge} ${vc_branch_name}"
-zstyle ':vcs_info:git:*' formats "%c%u%m${char_badge}${vc_branch_name}"
+zstyle ':vcs_info:git:*' actionformats "AF  ${vc_action} ${vc_git_hash}%m%u%c${char_badge} ${vc_branch_name}"
+zstyle ':vcs_info:git:*' formats "${vc_branch_name} %u%c%m "
 
 # Show untracked file status char on git status line
 +vi-use_git_untracked() {
