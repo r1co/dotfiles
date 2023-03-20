@@ -2,36 +2,28 @@ ZSH_ROOT="$HOME/.dotfiles/zsh"
 
 source $ZSH_ROOT/vars.zsh
 
-# load utils
-source $ZSH_ROOT/mods/config.zsh
-source $ZSH_ROOT/mods/plugins.zsh
-source $ZSH_ROOT/mods/flags.zsh
-source $ZSH_ROOT/mods/dot.zsh
+# set completion
+fpath=($ZSH_ROOT/completions $fpath)
 
-source $ZSH_ROOT/zsh-utils/utils.zsh
-source $ZSH_ROOT/zsh-utils/log.zsh
-source $ZSH_ROOT/zsh-utils/aliases.zsh
-source $ZSH_ROOT/zsh-utils/colors.zsh
-
+# load dot util
+source $ZSH_ROOT/dot/dot.zsh
 
 DEBUG "Debugging enabled"
 
-# make sure  scripts storage root exists
-mkdir -p $ZSH_STORAGE_ROOT
-
 # add scripts dir to path
-export PATH="$DOTFILES_ROOT/scripts:$PATH"
+addPathStart $DOTFILES_ROOT/scripts
 
+# use config.get to set default values
+# disable tmux by default -
+$(.dot.config.get plugins.autostartTMux.enabled false)
 
-# setup mods
-dot.config.setup
-dot.plugin.setup
-dot.flag.setup
-dot.alias.setup
+# load module packages
+${DOT_PREFIX}.package.register dot-plugins
+${DOT_PREFIX}.package.register config-patch
+${DOT_PREFIX}.package.register plugins
 
-# load theme
-source $ZSH_ROOT/themes/dot.zsh-theme
-# source $ZSH_ROOT/themes/new-theme.zsh-theme
+# set theme
+${DOT_PREFIX}.theme.load
 
 
 

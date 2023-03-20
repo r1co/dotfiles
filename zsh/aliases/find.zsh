@@ -1,9 +1,9 @@
 
 # find
-dot.alias.define.common find.file 'findFile'
-dot.alias.define.common find.inFile 'findInFile'
-dot.alias.define.common find.bigFiles 'findBigFiles'
-dot.alias.define.common find.dir 'findDir'
+common_alias find.file 'findFile'
+common_alias find.inFile 'findInFile'
+common_alias find.bigFiles 'findBigFiles'
+common_alias find.dir 'findDir'
 
 findFile() {
     FILENAME=$1

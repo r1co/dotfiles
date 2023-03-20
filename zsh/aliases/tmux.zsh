@@ -1,12 +1,12 @@
 
 # tmux command
-dot.alias.define.linux tmux.kill-server "tmux kill-server"
-dot.alias.define.linux tmux.n "tmux new-session -d -s"
-dot.alias.define.linux tmux.s "tmux switch-client -t"
-dot.alias.define.linux tmux.switch "tmux switch-client -t"
-dot.alias.define.linux tmux.res "tmux rename-session"
-dot.alias.define.linux tmux.rew "tmux rename-window"
-dot.alias.define.linux tmux.reload "tmux source-file ~/.tmux.conf \;"
+linux_alias tmux.kill-server "tmux kill-server"
+linux_alias tmux.n "tmux new-session -d -s"
+linux_alias tmux.s "tmux switch-client -t"
+linux_alias tmux.switch "tmux switch-client -t"
+linux_alias tmux.res "tmux rename-session"
+linux_alias tmux.rew "tmux rename-window"
+linux_alias tmux.reload "tmux source-file ~/.tmux.conf \;"
 
 function tmux.ns() {
     tmux has-session -t $session 2>/dev/null

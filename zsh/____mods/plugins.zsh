@@ -27,18 +27,35 @@ function dot.plugin.disable(){
 
 # load all enabled plugins
 function dot.plugin.loadEnabled() {
-    for file in $(find $ZSH_PLUGIN_ROOT -name "*.zsh" -type f); do
+    for file in $(find $ZSH_PLUGIN_ROOT -maxdepth 1 -name "*.zsh"   -type f ); do
         name=$(basename $file)
         name="${name/".zsh"/""}"
         # all plugins enabled by default
         enabled=$(dot.config.get "plugin.$name.enabled" true)
-        
         if [ $enabled = "true" ];
         then
             DEBUG "Load enabled plugin '$name'"
             source $file
         else
             DEBUG "Plugin '$name' disabled"
+        fi
+    done
+    
+    for file in $(find $ZSH_PLUGIN_ROOT/ -maxdepth 1 -mindepth 1 -name "*" -type d); do
+        name=$(basename $file)
+        plugin_path=$file/$name.zsh
+        
+        if test -f "$plugin_path"; then
+            enabled=$(dot.config.get "plugin.$name.enabled" true)
+            if [ $enabled = "true" ];
+            then
+                DEBUG "Load enabled plugin '$name'"
+                source $file
+            else
+                DEBUG "Plugin '$name' disabled"
+            fi
+        else
+            DEBUG "Folder $name does not contain $name.zsh, skipping"
         fi
     done
 }
