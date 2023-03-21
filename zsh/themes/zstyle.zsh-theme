@@ -123,14 +123,22 @@ prompt_context() {
 
 # Git: branch/detached head, dirty status
 prompt_git() {
-    [[ -n $vcs_info_msg_0_ ]] &&  next_segment "${vcs_info_msg_0_}"
+    [[ -n $vcs_info_msg_0_ ]] &&  next_segment "🌴 ${vcs_info_msg_0_}"
+}
+
+prompt_docker(){
+    local docker_context="$(find-docker-context)"
+    if [[ $docker_context != 'default' ]]; then
+        prompt_segment $DOCKER_BG_COLOR "$DOCKER_FG_COLOR" "🐳 $(find-docker-context)"
+    fi
 }
 
 prompt_dir(){
-    next_segment '%~ '
+    next_segment '%50<...<%~%<< '
 }
 
 prompt_cursor(){
+    ## escape colors
     echo -n '%F{\e[38;2;137;180;250m}'
     echo -n "$SEGMENT_SEPARATOR"
     echo -n '%F{\e[m\x1B[K}'
@@ -148,7 +156,7 @@ build_prompt() {
     prompt_context
     prompt_dir
     prompt_git
-    # next_segment "NPM"
+    prompt_docker
     # next_segment "DOCKER"
     prompt_end
 }
@@ -196,7 +204,7 @@ export VCS="git"
 
 local current_vcs="\":vcs_info:*\" enable $VCS"
 local char_badge=""
-local vc_branch_name="\uE0A0 %b"
+local vc_branch_name="%b"
 
 local vc_action="%F{238}%a %f%F{236}${char_arrow}%f"
 local vc_unstaged_status="\u270E"
