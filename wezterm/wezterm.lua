@@ -1,20 +1,29 @@
 local wezterm = require 'wezterm';
 
-local customTheme = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
-customTheme.background = "#000000"
-
+wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
+    local zoomed = ''
+    if tab.active_pane.is_zoomed then
+      zoomed = '[Z] '
+    end
+  
+    local index = ''
+    if #tabs > 1 then
+      index = string.format('[%d/%d] ', tab.tab_index + 1, #tabs)
+    end
+  
+    return zoomed .. index .. tab.active_pane.title
+  end)
+  
 return {
-    color_schemes = {
-        ["WezTheme"] = customTheme,
-      },
     font_size = 10,
-    font = wezterm.font('JetBrains Mono', {italic = false, harfbuzz_features = {'calt=0', 'clig=0', 'liga=0'}}),
+    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+    
     default_cursor_style = "BlinkingUnderline",
     cursor_blink_rate = 800,
-
     warn_about_missing_glyphs = false,
+    enable_wayland = true,
     color_scheme =  "Catppuccin Mocha",
-    window_background_opacity = 1.0,
+    window_background_opacity = 0.9,
     inactive_pane_hsb = {
         saturation = 0.9,
         brightness = 0.8,
@@ -25,8 +34,8 @@ return {
         target = "CursorColor",
     },
     window_padding = {
-        left = 10, right = 10,
-        top = 10, bottom = 10,
+        left = 5, right = 5,
+        top = 5, bottom = 5,
     },
 
     launch_menu = {
@@ -37,18 +46,18 @@ return {
 
     },
 
-    window_frame = {
-        -- inactive_titlebar_bg = "#353535",
-        -- active_titlebar_bg = "#2b2042",
-        -- inactive_titlebar_fg = "#cccccc",
-        -- active_titlebar_fg = "#ffffff",
-        -- inactive_titlebar_border_bottom = "#2b2042",
-        -- active_titlebar_border_bottom = "#2b2042",
-        -- button_fg = "#cccccc",
-        -- button_bg = "#2b2042",
-        -- button_hover_fg = "#ffffff",
-        -- button_hover_bg = "#3b3052",
-    },
+    -- window_frame = {
+    --     inactive_titlebar_bg = "#353535",
+    --     active_titlebar_bg = "#2b2042",
+    --     inactive_titlebar_fg = "#cccccc",
+    --     active_titlebar_fg = "#ffffff",
+    --     inactive_titlebar_border_bottom = "#2b2042",
+    --     active_titlebar_border_bottom = "#2b2042",
+    --     button_fg = "#cccccc",
+    --     button_bg = "#2b2042",
+    --     button_hover_fg = "#ffffff",
+    --     button_hover_bg = "#3b3052",
+    -- },
     keys = {
         -- Turn off the default CMD-m Hide action, allowing CMD-m to
         -- be potentially recognized and handled by the tab

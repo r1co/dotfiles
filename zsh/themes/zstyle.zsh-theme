@@ -117,19 +117,19 @@ prompt_context() {
     if [[ -n "$SSH_CLIENT" ]]; then
         next_segment "%(!.%{%F{yellow}%}.)SSH %n@%m "
     else
-        next_segment "@%m "
+        next_segment " %m "
     fi
 }
 
 # Git: branch/detached head, dirty status
 prompt_git() {
-    [[ -n $vcs_info_msg_0_ ]] &&  next_segment "🌴 ${vcs_info_msg_0_}"
+    [[ -n $vcs_info_msg_0_ ]] &&  next_segment " ${vcs_info_msg_0_}"
 }
 
 prompt_docker(){
     local docker_context="$(find-docker-context)"
     if [[ $docker_context != 'default' ]]; then
-        prompt_segment $DOCKER_BG_COLOR "$DOCKER_FG_COLOR" "🐳 $(find-docker-context)"
+        prompt_segment $DOCKER_BG_COLOR "$DOCKER_FG_COLOR" " $(find-docker-context)"
     fi
 }
 
