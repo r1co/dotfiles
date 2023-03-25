@@ -114,11 +114,24 @@ prompt_end() {
 
 
 prompt_context() {
-    if [[ -n "$SSH_CLIENT" ]]; then
-        next_segment "%(!.%{%F{yellow}%}.)SSH %n@%m "
+    # check if running on toolbox container
+    if [[ ! -z "${container}" ]]; then
+        if [[ ! -z "${TOOLBOX_PATH}" ]]; then
+            next_segment " "
+        else
+            next_segment " "
+        fi
     else
-        next_segment " %m "
+        if [[ -n "$SSH_CLIENT" ]]; then
+            next_segment "󰌘 "
+            next_segment "%n@%m"
+        else
+            next_segment " "
+            next_segment "%m "
+        fi
     fi
+    
+    
 }
 
 # Git: branch/detached head, dirty status
@@ -159,6 +172,7 @@ build_prompt() {
     prompt_docker
     # next_segment "DOCKER"
     prompt_end
+    
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt)
