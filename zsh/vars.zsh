@@ -9,6 +9,7 @@ ZSH_PLUGIN_ROOT="$ZSH_ROOT/plugins"
 
 THEME_ROOT="$ZSH_ROOT/themes"
 
+
 source "$ZSH_ROOT/colors.zsh"
 # COLORS_INFOBAR=( (255 0 0) (0 255 0) (0 0 255) )
 

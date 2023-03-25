@@ -94,8 +94,7 @@ extend_segment(){
 }
 
 colored_segment(){
-    local num_colors=${#SEGMENT_COLORS[@]}
-    local color=${SEGMENT_COLORS[$1]}
+    local color=$1
     local text_color=$(find_text_color $color)
     prompt_segment  $color $text_color $2
 }
@@ -117,17 +116,19 @@ prompt_context() {
     # check if running on toolbox container
     if [[ ! -z "${container}" ]]; then
         if [[ ! -z "${TOOLBOX_PATH}" ]]; then
-            next_segment " "
+            colored_segment $COLOR_CONTEXT_TOOLBOX " "
+            next_segment "%n@%m"
         else
-            next_segment " "
+            colored_segment $COLOR_CONTEXT_CONTAINER " "
+            next_segment "%n@%m"
         fi
     else
         if [[ -n "$SSH_CLIENT" ]]; then
-            next_segment "󰌘 "
+            colored_segment $COLOR_CONTEXT_SSH "󰌘 "
             next_segment "%n@%m"
         else
             next_segment " "
-            next_segment "%m "
+            # next_segment "%m "
         fi
     fi
     
