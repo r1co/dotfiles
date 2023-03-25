@@ -137,7 +137,9 @@ prompt_context() {
 
 # Git: branch/detached head, dirty status
 prompt_git() {
-    [[ -n $vcs_info_msg_0_ ]] &&  next_segment " ${vcs_info_msg_0_}"
+    if [[ -n $vcs_info_msg_0_ ]]; then
+        prompt_segment $COLOR_GIT_BG "$COLOR_GIT_FG" " ${vcs_info_msg_0_}"
+    fi
 }
 
 prompt_docker(){
